@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circuit d'aller-vers — du pied de l'immeuble à la résolution</title>
+<style>
+  :root{
+    --bleu:#1d4e89; --bleu-c:#e8f0fa;
+    --orange:#e07b39; --orange-c:#fdf1e6;
+    --vert:#2e8b57; --vert-c:#e9f6ef;
+    --rouge:#c0392b; --rouge-c:#fdecea;
+    --violet:#6a4c93; --violet-c:#f2edf8;
+    --gris:#5b6770; --trait:#b0bec5;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Segoe UI",Arial,sans-serif; background:#f4f6f9; color:#263238; padding:24px;}
+  .page{max-width:1050px; margin:0 auto; background:#fff; border-radius:14px;
+        box-shadow:0 2px 16px rgba(0,0,0,.09); padding:34px 42px;}
+  h1{font-size:1.45rem; color:var(--bleu); margin-bottom:6px;}
+  .sous{color:var(--gris); font-size:.92rem; margin-bottom:8px;}
+  .objectif{display:inline-block; background:var(--bleu); color:#fff; font-weight:600;
+            font-size:.88rem; padding:7px 14px; border-radius:20px; margin:10px 0 24px;}
+
+  .circuit{display:flex; flex-direction:column; align-items:center; gap:0;}
+  .bloc{width:100%; max-width:820px; border-radius:14px; padding:18px 22px;
+        border:1px solid #d9e0e8; position:relative;}
+  .bloc h2{font-size:1.05rem; margin-bottom:10px; display:flex; align-items:center; gap:10px;}
+  .num{display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px;
+       border-radius:50%; color:#fff; font-size:.9rem; flex:none;}
+  .bloc ol{list-style:none; counter-reset:item;}
+  .bloc ol li{font-size:.9rem; padding:4px 0 4px 30px; position:relative; counter-increment:item;}
+  .bloc ol li::before{content:counter(item); position:absolute; left:0; top:5px;
+       width:20px; height:20px; border-radius:50%; background:#fff; color:inherit;
+       border:1.5px solid currentColor; font-size:.72rem; display:flex;
+       align-items:center; justify-content:center; font-weight:700;}
+  .note{font-size:.8rem; color:var(--gris); margin-top:8px; font-style:italic;}
+
+  .fleche{display:flex; flex-direction:column; align-items:center; margin:4px 0;}
+  .fleche .tige{width:4px; height:26px; background:var(--trait); border-radius:2px;}
+  .fleche .pointe{width:0; height:0; border-left:9px solid transparent;
+       border-right:9px solid transparent; border-top:12px solid var(--trait);}
+  .fleche .libelle{font-size:.78rem; color:var(--gris); background:#eef2f6;
+       padding:3px 12px; border-radius:12px; margin:4px 0;}
+
+  .bleu{background:var(--bleu-c);} .bleu h2,.bleu ol li{color:var(--bleu);} .bleu .num{background:var(--bleu);}
+  .orange{background:var(--orange-c);} .orange h2,.orange ol li{color:#b35f22;} .orange .num{background:var(--orange);}
+  .vert{background:var(--vert-c);} .vert h2,.vert ol li{color:#226b43;} .vert .num{background:var(--vert);}
+  .violet{background:var(--violet-c);} .violet h2,.violet ol li{color:#553d78;} .violet .num{background:var(--violet);}
+
+  .urgence{background:var(--rouge-c); border:2px solid var(--rouge); border-radius:14px;
+           padding:16px 20px; margin-top:26px; max-width:820px;}
+  .urgence h2{color:var(--rouge); font-size:1.05rem; margin-bottom:8px;}
+  .urgence ul{list-style:none; display:flex; flex-wrap:wrap; gap:8px;}
+  .urgence li{background:#fff; border:1px solid var(--rouge); color:var(--rouge);
+              font-size:.85rem; font-weight:600; padding:6px 12px; border-radius:20px;}
+
+  .grille{display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin-top:26px;}
+  .carte{border:1px solid #d9e0e8; border-radius:12px; padding:14px 16px; font-size:.88rem;}
+  .carte h3{font-size:.95rem; margin-bottom:8px;}
+  .carte ul{list-style:none;}
+  .carte li{padding:3px 0 3px 16px; position:relative;}
+  .carte li::before{content:"›"; position:absolute; left:0; color:#90a4ae;}
+  .tags{display:flex; flex-wrap:wrap; gap:6px;}
+  .tag{font-size:.8rem; padding:4px 10px; border-radius:14px; background:#fff;}
+  .c-bleu h3{color:var(--bleu);} .c-bleu .tag{border:1px solid var(--bleu); color:var(--bleu);}
+  .c-orange h3{color:var(--orange);} .c-orange .tag{border:1px solid var(--orange); color:#b35f22;}
+  .c-violet h3{color:var(--violet);} .c-violet .tag{border:1px solid var(--violet); color:#553d78;}
+  .c-rouge h3{color:var(--rouge);} .c-rouge .tag{border:1px solid var(--rouge); color:var(--rouge);}
+
+  .refs{margin-top:26px; background:var(--violet-c); border-radius:12px; padding:16px 20px;
+        display:flex; flex-wrap:wrap; gap:14px; align-items:center;}
+  .refs h3{color:var(--violet); font-size:.95rem;}
+  .ref{background:#fff; border:1px solid var(--violet); color:var(--violet);
+       font-size:.85rem; font-weight:600; padding:7px 14px; border-radius:10px;}
+
+  @media print{ body{background:#fff; padding:0;} .page{box-shadow:none; border-radius:0; padding:16px;} }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Circuit d'aller-vers</h1>
+  <p class="sous">Du repérage au pied de l'immeuble jusqu'à la résolution — service municipal d'insertion</p>
+  <div class="objectif">🎯 Objectif par individu : rompre l'isolement (le projet sera travaillé avec l'interlocuteur dédié)</div>
+
+  <div class="circuit">
+
+    <div class="bloc bleu">
+      <h2><span class="num">1</span>Repérage « au pied de l'immeuble »</h2>
+      <ol>
+        <li>Rompre l'isolement</li>
+        <li>Identifier une situation d'urgence santé (critères précis) ou une situation à risque</li>
+        <li>Informer sur les droits</li>
+        <li>Sensibiliser sur les opportunités</li>
+        <li>Si la demande est claire → accompagner vers l'interlocuteur, sinon → prendre rendez-vous</li>
+        <li>Rester sur l'objectif n°1 : le projet sera travaillé par l'interlocuteur</li>
+      </ol>
+    </div>
+
+    <div class="fleche"><div class="tige"></div><div class="pointe"></div><div class="libelle">aller-vers de proximité</div><div class="tige"></div><div class="pointe"></div></div>
+
+    <div class="bloc orange">
+      <h2><span class="num">2</span>Permanence dans le quartier</h2>
+      <ol>
+        <li>Informer sur les droits</li>
+        <li>Sensibiliser sur les opportunités</li>
+        <li>Si la demande est claire → accompagner vers l'interlocuteur, sinon → prendre rendez-vous</li>
+        <li>Rester sur l'objectif n°1 : le projet sera travaillé par l'interlocuteur</li>
+      </ol>
+    </div>
+
+    <div class="fleche"><div class="tige"></div><div class="pointe"></div><div class="libelle">demande à approfondir → rendez-vous</div><div class="tige"></div><div class="pointe"></div></div>
+
+    <div class="bloc vert">
+      <h2><span class="num">3</span>Prise de rendez-vous</h2>
+      <ol>
+        <li>Identifier la demande</li>
+        <li>Accompagner vers l'interlocuteur</li>
+        <li>Rester sur l'objectif n°1 : le projet sera travaillé par l'interlocuteur</li>
+      </ol>
+      <p class="note">🔒 Jamais dans un endroit public — toujours dans un local-mairie dédié à ces rencontres, en présence du coordinateur vie de quartier.</p>
+    </div>
+
+    <div class="fleche"><div class="tige"></div><div class="pointe"></div><div class="libelle">mise en relation</div><div class="tige"></div><div class="pointe"></div></div>
+
+    <div class="bloc violet">
+      <h2><span class="num">4</span>Interlocuteur dédié — travail du projet</h2>
+      <ol>
+        <li>Construction du projet avec la personne (emploi, formation, santé, lien social…)</li>
+        <li>Suivi jusqu'à la résolution</li>
+      </ol>
+    </div>
+
+    <div class="urgence">
+      <h2>⚠️ Urgence détectée à n'importe quelle étape → circuit immédiat</h2>
+      <ul>
+        <li>Sans domicile</li>
+        <li>Comportement troublé, risque pour sa sécurité et celle des autres</li>
+        <li>Menacé par des tiers</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="grille">
+    <div class="carte c-bleu">
+      <h3>Types de demandes claires → accompagnement direct</h3>
+      <div class="tags">
+        <span class="tag">Démarches informatiques</span>
+        <span class="tag">Recherche d'emploi</span>
+        <span class="tag">Recherche de stages</span>
+        <span class="tag">Recherche de formation</span>
+        <span class="tag">Orientation scolaire</span>
+        <span class="tag">Orientation professionnelle</span>
+        <span class="tag">Projet associatif</span>
+        <span class="tag">Projet d'activité pro indépendante</span>
+      </div>
+    </div>
+    <div class="carte c-rouge">
+      <h3>Signes à repérer — changements de comportements</h3>
+      <div class="tags">
+        <span class="tag">Addiction</span>
+        <span class="tag">Mauvaise fréquentation</span>
+        <span class="tag">Temps passé à l'extérieur</span>
+        <span class="tag">Incivilités</span>
+      </div>
+    </div>
+    <div class="carte c-orange">
+      <h3>Décision par défaut</h3>
+      <ul>
+        <li>Demande claire → accompagnement vers l'interlocuteur</li>
+        <li>Demande floue ou à explorer → prise de rendez-vous en local-mairie</li>
+        <li>Dans tous les cas : l'aller-vers reste centré sur la rupture de l'isolement</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="refs">
+    <h3>Référents urgences :</h3>
+    <span class="ref">Santé — Maxime Moreau</span>
+    <span class="ref">Sécurité — Axel Jermidi</span>
+    <span class="ref">Par défaut — Antony Vinciguerra</span>
+  </div>
+</div>
+</body>
+</html>
