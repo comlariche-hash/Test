@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parcours d'insertion — Service municipal d'insertion</title>
+<style>
+  :root{
+    --bleu:#1d4e89; --bleu-clair:#eaf1f9; --vert:#2e8b57; --vert-clair:#e9f6ef;
+    --orange:#e07b39; --orange-clair:#fdf1e7; --violet:#6a4c93; --violet-clair:#f2edf8;
+    --gris:#5b6770;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:"Segoe UI", Arial, sans-serif; background:#f5f7fa; color:#263238; padding:24px;}
+  .page{max-width:1100px; margin:0 auto; background:#fff; border-radius:14px;
+        box-shadow:0 2px 14px rgba(0,0,0,.08); padding:32px 40px;}
+  h1{font-size:1.5rem; color:var(--bleu); margin-bottom:4px;}
+  .sous-titre{color:var(--gris); margin-bottom:26px; font-size:.95rem;}
+  .etapes{display:flex; flex-wrap:wrap; gap:18px;}
+  .etape{flex:1 1 300px; min-width:280px; border-radius:12px; padding:16px 18px;
+         border:1px solid #dde3ea; position:relative;}
+  .etape h2{font-size:1.02rem; margin-bottom:8px; display:flex; align-items:center; gap:10px;}
+  .num{display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px;
+       border-radius:50%; color:#fff; font-size:.85rem; flex:none;}
+  .etape ul{list-style:none;}
+  .etape li{font-size:.88rem; padding:3px 0 3px 16px; position:relative; color:#37474f;}
+  .etape li::before{content:"›"; position:absolute; left:0; color:#90a4ae;}
+  .fleche{text-align:center; color:#90a4ae; font-size:1.3rem; flex:1 1 100%;}
+  .bleu{background:var(--bleu-clair);} .bleu .num{background:var(--bleu);}
+  .vert{background:var(--vert-clair);} .vert .num{background:var(--vert);}
+  .orange{background:var(--orange-clair);} .orange .num{background:var(--orange);}
+  .violet{background:var(--violet-clair);} .violet .num{background:var(--violet);}
+  .versants{margin-top:30px;}
+  .versants h3{font-size:1.05rem; color:var(--bleu); margin-bottom:12px;}
+  .piliers{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .pilier{border-radius:10px; padding:12px 14px; font-size:.88rem; border:1px solid #dde3ea;}
+  .pilier b{display:block; margin-bottom:5px; font-size:.92rem;}
+  .legende{margin-top:28px; padding-top:16px; border-top:2px dashed #cfd8dc;
+           font-size:.82rem; color:var(--gris);}
+  @media print{ body{background:#fff; padding:0;} .page{box-shadow:none; border-radius:0; padding:16px;} }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>Parcours de la personne — du pied de l'immeuble à la résolution</h1>
+  <p class="sous-titre">Circuit type de prise en charge par le service municipal d'insertion (ex. CCAS / service Insertion-Emploi)</p>
+
+  <div class="etapes">
+
+    <div class="etape bleu">
+      <h2><span class="num">1</span>Repérage au pied de l'immeuble</h2>
+      <ul>
+        <li>Veille de terrain : travailleurs sociaux, gardiens, bailleurs, voisins, associations de quartier</li>
+        <li>Signallement simple (téléphone, mail, plateforme dédiée) ou sollicitation directe de la personne</li>
+        <li>Accueil de proximité / permanence sociale de quartier</li>
+      </ul>
+    </div>
+
+    <div class="fleche">▼</div>
+
+    <div class="etape bleu">
+      <h2><span class="num">2</span>Contact &amp; premier accueil</h2>
+      <ul>
+        <li>Écoute, mise en confiance, sans condition de ressources</li>
+        <li>Évaluation immédiate : santé, hébergement, sécurité, dettes alimentaires urgentes</li>
+        <li>Déclenchement des urgences si nécessaire (SAMU social, 115, alimentaire)</li>
+      </ul>
+    </div>
+
+    <div class="fleche">▼</div>
+
+    <div class="etape orange">
+      <h2><span class="num">3</span>Diagnostic partagé de la situation</h2>
+      <ul>
+        <li>Rendez-vous avec un référent unique (travailleur social)</li>
+        <li>Cartographie des besoins : emploi, formation, logement, santé, budget, isolement, administratif</li>
+        <li>Vérification des droits non réclamés (CAF, mutuelle, RSA…)</li>
+      </ul>
+    </div>
+
+    <div class="fleche">▼</div>
+
+    <div class="etape orange">
+      <h2><span class="num">4</span>Construction du plan d'accompagnement</h2>
+      <ul>
+        <li>Objectifs priorisés définis <b>avec</b> la personne (contrat/chemin d'insertion)</li>
+        <li>Ouverture de droits, constitution des dossiers</li>
+        <li>Mise en relation avec les partenaires internes et externes</li>
+      </ul>
+    </div>
+
+    <div class="fleche">▼</div>
+
+    <div class="etape vert">
+      <h2><span class="num">5</span>Orientation vers les bons dispositifs</h2>
+      <ul>
+        <li>Emploi / formation : PLIE, Mission locale, Pôle emploi/France Travail, chantiers d'insertion, école de la 2ᵉ chance</li>
+        <li>Santé : permanences d'accès aux soins, centres de santé, CPAM, psychologues</li>
+        <li>Logement / budget : SOLIBAIL, fonds solidaires, médiateurs, points conseil budget</li>
+        <li>Isolement : clubs seniors, ateliers participatifs, bénévolat, médiation numérique</li>
+      </ul>
+    </div>
+
+    <div class="fleche">▼</div>
+
+    <div class="etape vert">
+      <h2><span class="num">6</span>Accompagnement de proximité</h2>
+      <ul>
+        <li>Suivi régulier par le référent (démarches, rappels, accompagnement physique)</li>
+        <li>Groupes d'entraide, ateliers collectifs (CV, numérique, français, mobilité)</li>
+        <li>Allers-retours possibles : le plan est ajusté à chaque étape</li>
+      </ul>
+    </div>
+
+    <div class="fleche">▼</div>
+
+    <div class="etape violet">
+      <h2><span class="num">7</span>Résolution &amp; consolidation</h2>
+      <ul>
+        <li>Emploi stabilisé, formation qualifiante, santé retrouvée, lien social rétabli</li>
+        <li>Sortie d'accompagnement préparée : la personne est autonome dans ses droits</li>
+        <li>Réponse rapide possible en cas de nouvelle difficulté (file active 12 mois)</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="versants">
+    <h3>Le service mobilise en continu</h3>
+    <div class="piliers">
+      <div class="pilier" style="background:var(--bleu-clair)"><b>🗺️ Terrain</b>Veille sociale de proximité, maraudes, permanences de quartier</div>
+      <div class="pilier" style="background:var(--orange-clair)"><b>🤝 Partenariats</b>Bailleurs, CAF, CPAM, associations, entreprises locales, bénévoles</div>
+      <div class="pilier" style="background:var(--vert-clair)"><b>⏱️ Réactivité</b>Délais d'intervention courts, urgences traitées en parallèle du parcours</div>
+      <div class="pilier" style="background:var(--violet-clair)"><b>📊 Pilotage</b>Comité de suivi mensuel, indicateurs de sortie d'insertion</div>
+    </div>
+  </div>
+
+  <p class="legende">
+    Ce schéma est un circuit générique : il peut être adapté aux dispositifs propres à votre commune
+    (CCAS, service Insertion, PLIE, Maison de l'Emploi…). Version imprimable : Ctrl+P.
+  </p>
+</div>
+</body>
+</html>
